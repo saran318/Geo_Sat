@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P3 · Frontend & Deploy</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Courier New',monospace;background:#0d1117;color:#e6edf3;min-height:100vh}
+  header{background:linear-gradient(135deg,#2a1117,#0d1117);padding:24px 20px;border-bottom:2px solid #7a1a1a}
+  .badge{display:inline-block;background:#7a1a1a;color:#ffa198;padding:4px 12px;border-radius:20px;font-size:11px;letter-spacing:1px;margin-bottom:8px}
+  h1{font-size:22px;color:#ffa198;margin-bottom:4px}
+  .sub{color:#8b949e;font-size:12px}
+  .team-bar{display:flex;gap:8px;padding:12px 20px;background:#161b22;border-bottom:1px solid #30363d}
+  .team-bar a{text-decoration:none;padding:6px 14px;border-radius:6px;font-size:12px;border:1px solid #30363d;color:#8b949e;transition:.2s}
+  .team-bar a.active{background:#7a1a1a;color:#ffa198;border-color:#7a1a1a}
+  .team-bar a:hover{border-color:#7a1a1a;color:#ffa198}
+  main{padding:20px;max-width:800px}
+  .phase{background:#161b22;border:1px solid #30363d;border-left:3px solid #7a1a1a;border-radius:8px;margin-bottom:14px;overflow:hidden}
+  .phase-hd{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#1c2128}
+  .phase-hd h3{font-size:14px;color:#e6edf3}
+  .week{color:#7a1a1a;font-size:11px;background:#1e0d0d;padding:3px 8px;border-radius:4px;border:1px solid #7a1a1a}
+  .phase-body{padding:14px 16px;display:none}
+  .phase-body.open{display:block}
+  .task{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+  .task-num{color:#ffa198;font-size:12px;min-width:20px;margin-top:2px}
+  .task p{font-size:12px;line-height:1.6;color:#c9d1d9}
+  .task strong{color:#ffa198}
+  .deliverable{background:#1e0d0d;border:1px solid #7a1a1a;border-radius:6px;padding:10px 12px;margin-top:12px;font-size:11px;color:#ff7b72}
+  .deliverable span{color:#8b949e}
+  .req-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px 20px;margin-bottom:14px}
+  .req-box h2{font-size:13px;color:#ffa198;margin-bottom:10px;letter-spacing:.5px}
+  .req-box ul{list-style:none}
+  .req-box li{font-size:12px;color:#c9d1d9;padding:4px 0;padding-left:14px;position:relative;line-height:1.5}
+  .req-box li::before{content:'▸';color:#7a1a1a;position:absolute;left:0}
+  .handoff{background:#1e0d0d;border:1px dashed #7a1a1a;border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#8b949e}
+  .handoff strong{color:#ffa198}
+  .contact{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;margin-bottom:14px}
+  .contact h2{font-size:12px;color:#8b949e;margin-bottom:10px;letter-spacing:.5px}
+  .cinfo{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+  .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;color:#fff}
+  .av1{background:#2d5a27}.av2{background:#1a4a7a}.av3{background:#7a1a1a}
+  .cname{font-size:12px;color:#e6edf3}
+  .crole{font-size:10px;color:#8b949e}
+  .clinks{display:flex;gap:6px;margin-top:4px}
+  .clinks a{font-size:10px;color:#7a1a1a;text-decoration:none;padding:2px 8px;border:1px solid #7a1a1a;border-radius:4px}
+  .tip{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:10px 14px;margin-bottom:10px;font-size:11px;color:#c9d1d9}
+  .tip strong{color:#ffa198}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">PERSON 3 OF 3</div>
+  <h1>🖥 Frontend & Deployment Engineer</h1>
+  <div class="sub">Satellite Image Land-Use Classifier · BCA Data Science Capstone</div>
+</header>
+<nav class="team-bar">
+  <a href="person1_data_ml.html">P1 · Data & ML</a>
+  <a href="person2_backend_inference.html">P2 · Backend</a>
+  <a href="person3_frontend_deploy.html" class="active">P3 · You</a>
+</nav>
+<main>
+
+<div class="handoff">
+  <strong>📥 You receive from P2:</strong> area_stats.csv, classified map GeoTIFFs, diff PNG visualisations, GitHub Release link for .pt weights<br>
+  <strong>📤 You deliver:</strong> Live Streamlit Cloud URL, GitHub repo, README.md, PDF report, 2-min demo video
+</div>
+
+<div class="req-box">
+  <h2>YOUR RESPONSIBILITIES</h2>
+  <ul>
+    <li>Build streamlit_app.py — main layout with sidebar & 3 tabs</li>
+    <li>Build map_view.py — Folium map with classified PNG overlay + legend</li>
+    <li>Build charts.py — Plotly stacked area + line charts from CSV</li>
+    <li>Build export.py — PDF report (ReportLab) + GeoTIFF download</li>
+    <li>Add model download at startup (GitHub Releases URL)</li>
+    <li>Use @st.cache_resource for model, @st.cache_data for tiles</li>
+    <li>Deploy to Streamlit Cloud, set API credentials as Secrets</li>
+    <li>Write thorough README.md with screenshots</li>
+    <li>Record 2-minute demo video (Bengaluru 2019–2023)</li>
+    <li>Prepare final report PDF</li>
+    <li>Optional: Add Claude API call for plain-language trend summary</li>
+  </ul>
+</div>
+
+<div class="req-box">
+  <h2>YOUR TECH STACK</h2>
+  <ul>
+    <li>Streamlit (main app framework)</li>
+    <li>folium + st_folium (interactive Leaflet map)</li>
+    <li>plotly (trend charts)</li>
+    <li>reportlab, pillow (PDF generation)</li>
+    <li>pandas (load area_stats.csv for charts)</li>
+    <li>Streamlit Cloud (free deployment)</li>
+    <li>GitHub (version control + model weights release)</li>
+  </ul>
+</div>
+
+<div onclick="toggle('p1')" class="phase">
+  <div class="phase-hd"><h3>Phase 1 (Shared) — Initial Setup</h3><span class="week">Weeks 1–2</span></div>
+  <div class="phase-body" id="p1">
+    <div class="task"><span class="task-num">01</span><p>Set up the <strong>GitHub repo</strong> with the recommended folder structure. Create branches for each person. Set up requirements.txt and .streamlit/config.toml (theme + layout config).</p></div>
+    <div class="task"><span class="task-num">02</span><p>Register a <strong>Streamlit Cloud</strong> account at share.streamlit.io — connect to the GitHub repo early so deployment pipeline is ready.</p></div>
+    <div class="deliverable"><span>📦 Deliverable: </span>GitHub repo initialized, Streamlit Cloud account linked</div>
+  </div>
+</div>
+
+<div onclick="toggle('p5')" class="phase">
+  <div class="phase-hd"><h3>Phase 5 — Streamlit App & Export</h3><span class="week">Weeks 13–14</span></div>
+  <div class="phase-body" id="p5">
+    <div class="task"><span class="task-num">01</span><p>Build <strong>streamlit_app.py</strong>: Sidebar with city dropdown, year range slider, "Run analysis ▶" button. Three tabs: Map view, Trend charts, Export. Use <strong>@st.cache_resource</strong> for model load.</p></div>
+    <div class="task"><span class="task-num">02</span><p>Build <strong>map_view.py</strong>: use <code>folium.raster_layers.ImageOverlay</code> to overlay classified PNG on OpenStreetMap. Add 5-class legend with class colours. Add year slider to swap overlay layers. Render with st_folium.</p></div>
+    <div class="task"><span class="task-num">03</span><p>Build <strong>charts.py</strong>: Stacked area chart (class area in sq km across years). Line chart (urban growth vs vegetation decline, same axis). Use official class colours (#8a7a6e, #2d5a27, #6ea84e, #4a8fa8, #c8a96e). Render with <code>st.plotly_chart(use_container_width=True)</code>.</p></div>
+    <div class="task"><span class="task-num">04</span><p>Build <strong>export.py</strong>: Auto-generate 4-page PDF via ReportLab — cover (city, year range, date), classified map image, area stats table, trend chart. Add <strong>st.download_button</strong>. Include SRM roll number and project title in footer.</p></div>
+    <div class="task"><span class="task-num">05</span><p>Deploy: push repo to GitHub → share.streamlit.io → connect repo → main file = <code>app/streamlit_app.py</code>. Add Copernicus API credentials as <strong>Streamlit Secrets</strong> (never hardcode). Share live URL with guide.</p></div>
+    <div class="tip"><strong>💡 Cache tip:</strong> Use @st.cache_data for processed tiles — Sentinel-2 tiles take 30–90 seconds to download. Caching makes re-running same city/year instant.</div>
+    <div class="deliverable"><span>📦 Deliverable: </span>Live Streamlit Cloud URL + GitHub repo link with README</div>
+  </div>
+</div>
+
+<div onclick="toggle('p6')" class="phase">
+  <div class="phase-hd"><h3>Phase 6 — Polish, Docs & Viva</h3><span class="week">Weeks 15–16</span></div>
+  <div class="phase-body" id="p6">
+    <div class="task"><span class="task-num">01</span><p>Write thorough <strong>README.md</strong>: project overview, architecture diagram, dataset sources with links, installation steps, how to run training, how to run app locally, live Streamlit URL. Add a <strong>GIF or screenshot</strong> at the top.</p></div>
+    <div class="task"><span class="task-num">02</span><p>Record a <strong>2-minute demo video</strong>: select Bengaluru, run 2019–2023 analysis, show the map changing year by year, point at lake shrinkage, show trend chart, download the PDF. Upload to YouTube (unlisted) and link in report.</p></div>
+    <div class="task"><span class="task-num">03</span><p><strong>Optional bonus:</strong> Add one <strong>Claude API call</strong> that takes area_stats table as input and generates a 3-sentence plain-language summary of the trend. This earns the "AI integration beyond CNN" label.</p></div>
+    <div class="task"><span class="task-num">04</span><p>Prepare viva answers: <em>"Why Streamlit over Flask?"</em>, <em>"How did you handle large satellite tile performance?"</em>, <em>"Why ResNet-50 specifically?"</em>, <em>"What does NDVI measure?"</em></p></div>
+    <div class="deliverable"><span>📦 Deliverable: </span>Final report PDF + GitHub repo + demo video URL + live app link</div>
+  </div>
+</div>
+
+<div class="contact">
+  <h2>TEAM CONTACTS</h2>
+  <div class="cinfo">
+    <div class="avatar av1">P1</div>
+    <div><div class="cname">Person 1 — Data & ML Engineer</div><div class="crole">Training pipeline, EuroSAT, model weights</div>
+    <div class="clinks"><a href="person1_data_ml.html">View P1 Tasks</a></div></div>
+  </div>
+  <div class="cinfo">
+    <div class="avatar av2">P2</div>
+    <div><div class="cname">Person 2 — Backend & Inference</div><div class="crole">Sends you: area_stats.csv, change maps, GitHub Release URL</div>
+    <div class="clinks"><a href="person2_backend_inference.html">View P2 Tasks</a></div></div>
+  </div>
+  <div class="cinfo">
+    <div class="avatar av3">P3</div>
+    <div><div class="cname">You — Frontend & Deployment</div><div class="crole">Streamlit app, PDF export, deployment, README, demo video</div></div>
+  </div>
+</div>
+
+</main>
+<script>
+function toggle(id){
+  var el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>

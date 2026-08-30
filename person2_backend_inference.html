@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P2 · Backend & Inference</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Courier New',monospace;background:#0d1117;color:#e6edf3;min-height:100vh}
+  header{background:linear-gradient(135deg,#1a2744,#0d1117);padding:24px 20px;border-bottom:2px solid #1a4a7a}
+  .badge{display:inline-block;background:#1a4a7a;color:#79c0ff;padding:4px 12px;border-radius:20px;font-size:11px;letter-spacing:1px;margin-bottom:8px}
+  h1{font-size:22px;color:#79c0ff;margin-bottom:4px}
+  .sub{color:#8b949e;font-size:12px}
+  .team-bar{display:flex;gap:8px;padding:12px 20px;background:#161b22;border-bottom:1px solid #30363d}
+  .team-bar a{text-decoration:none;padding:6px 14px;border-radius:6px;font-size:12px;border:1px solid #30363d;color:#8b949e;transition:.2s}
+  .team-bar a.active{background:#1a4a7a;color:#79c0ff;border-color:#1a4a7a}
+  .team-bar a:hover{border-color:#1a4a7a;color:#79c0ff}
+  main{padding:20px;max-width:800px}
+  .phase{background:#161b22;border:1px solid #30363d;border-left:3px solid #1a4a7a;border-radius:8px;margin-bottom:14px;overflow:hidden}
+  .phase-hd{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#1c2128}
+  .phase-hd h3{font-size:14px;color:#e6edf3}
+  .week{color:#1a4a7a;font-size:11px;background:#0d1e2e;padding:3px 8px;border-radius:4px;border:1px solid #1a4a7a}
+  .phase-body{padding:14px 16px;display:none}
+  .phase-body.open{display:block}
+  .task{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+  .task-num{color:#79c0ff;font-size:12px;min-width:20px;margin-top:2px}
+  .task p{font-size:12px;line-height:1.6;color:#c9d1d9}
+  .task strong{color:#79c0ff}
+  .deliverable{background:#0d1e2e;border:1px solid #1a4a7a;border-radius:6px;padding:10px 12px;margin-top:12px;font-size:11px;color:#58a6ff}
+  .deliverable span{color:#8b949e}
+  .req-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px 20px;margin-bottom:14px}
+  .req-box h2{font-size:13px;color:#79c0ff;margin-bottom:10px;letter-spacing:.5px}
+  .req-box ul{list-style:none}
+  .req-box li{font-size:12px;color:#c9d1d9;padding:4px 0;padding-left:14px;position:relative;line-height:1.5}
+  .req-box li::before{content:'▸';color:#1a4a7a;position:absolute;left:0}
+  .handoff{background:#0d1e2e;border:1px dashed #1a4a7a;border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#8b949e}
+  .handoff strong{color:#79c0ff}
+  .contact{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;margin-bottom:14px}
+  .contact h2{font-size:12px;color:#8b949e;margin-bottom:10px;letter-spacing:.5px}
+  .cinfo{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+  .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;color:#fff}
+  .av1{background:#2d5a27}.av2{background:#1a4a7a}.av3{background:#7a1a1a}
+  .cname{font-size:12px;color:#e6edf3}
+  .crole{font-size:10px;color:#8b949e}
+  .clinks{display:flex;gap:6px;margin-top:4px}
+  .clinks a{font-size:10px;color:#1a4a7a;text-decoration:none;padding:2px 8px;border:1px solid #1a4a7a;border-radius:4px}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">PERSON 2 OF 3</div>
+  <h1>⚙️ Backend & Inference Engineer</h1>
+  <div class="sub">Satellite Image Land-Use Classifier · BCA Data Science Capstone</div>
+</header>
+<nav class="team-bar">
+  <a href="person1_data_ml.html">P1 · Data & ML</a>
+  <a href="person2_backend_inference.html" class="active">P2 · You</a>
+  <a href="person3_frontend_deploy.html">P3 · Frontend</a>
+</nav>
+<main>
+
+<div class="handoff">
+  <strong>📥 You receive from P1:</strong> trained model weights (resnet50_eurosat.pt), patch slicer coordinates, preprocessed GeoTIFFs<br>
+  <strong>📤 You send to P3:</strong> change_stats.csv (area per class per year), classified map GeoTIFFs, diff visualisation PNGs
+</div>
+
+<div class="req-box">
+  <h2>YOUR RESPONSIBILITIES</h2>
+  <ul>
+    <li>Build predict.py — load model weights, run inference on tiles</li>
+    <li>Build stitch.py — reassemble patch predictions into full map</li>
+    <li>Fetch 3–5 years of cloud-free imagery via GEE Python API</li>
+    <li>Run inference on all yearly GeoTIFFs (loop)</li>
+    <li>Apply SCL cloud masking before inference</li>
+    <li>Compute pixel-level change maps (year-on-year diff)</li>
+    <li>Build area statistics table (sq km per class per year)</li>
+    <li>Write diff_maps.py and stats.py in change_detection/</li>
+    <li>Export change_YYYY_YYYY.tif files + area_stats.csv</li>
+    <li>Keep all maps spatially aligned (same CRS, extent, pixel size)</li>
+  </ul>
+</div>
+
+<div class="req-box">
+  <h2>YOUR TECH STACK</h2>
+  <ul>
+    <li>Python 3.10+, PyTorch (inference only, no training)</li>
+    <li>earthengine-api (Google Earth Engine multi-year fetch)</li>
+    <li>rasterio, GDAL, shapely, geopandas</li>
+    <li>numpy (pixel comparison, diff maps)</li>
+    <li>pandas (area stats DataFrame → CSV)</li>
+    <li>scikit-learn (metrics if needed)</li>
+  </ul>
+</div>
+
+<div onclick="toggle('p3')" class="phase">
+  <div class="phase-hd"><h3>Phase 3 (Shared) — Inference on Real Tile</h3><span class="week">Weeks 6–9</span></div>
+  <div class="phase-body" id="p3">
+    <div class="task"><span class="task-num">01</span><p>Receive <strong>resnet50_eurosat.pt</strong> from P1. Build <strong>predict.py</strong>: load weights with <code>map_location="cpu"</code>, set model to eval(), run batch inference on 64×64 patches.</p></div>
+    <div class="task"><span class="task-num">02</span><p>Build <strong>stitch.py</strong>: use stored patch coordinates from P1 to reassemble predictions into full-resolution classified map. Save as <strong>GeoTIFF with correct CRS metadata</strong>.</p></div>
+    <div class="task"><span class="task-num">03</span><p>Apply <strong>SCL (Scene Classification Layer)</strong> cloud masking before inference — mask cloudy pixels to prevent misclassification as "water" or "barren". This boosts apparent accuracy by 10–15%.</p></div>
+    <div class="deliverable"><span>📦 Deliverable: </span>inference/ folder (predict.py, stitch.py) + first city classified map GeoTIFF</div>
+  </div>
+</div>
+
+<div onclick="toggle('p4')" class="phase">
+  <div class="phase-hd"><h3>Phase 4 — Change Detection</h3><span class="week">Weeks 10–12</span></div>
+  <div class="phase-body" id="p4">
+    <div class="task"><span class="task-num">01</span><p>Use <strong>GEE Python API</strong> to pull one cloud-free Sentinel-2 composite per year (2019–2023) for your city. A composite picks least-cloudy pixel across the year. Export each as GeoTIFF to Google Drive → download to data/processed/.</p></div>
+    <div class="task"><span class="task-num">02</span><p>Loop over all yearly GeoTIFFs, run model inference on each, produce <strong>one classified map per year</strong> as numpy array and GeoTIFF. Keep spatially aligned — same CRS, extent, pixel size.</p></div>
+    <div class="task"><span class="task-num">03</span><p>Build <strong>diff_maps.py</strong>: for each consecutive pair (2019→2020, etc.), create diff map highlighting changed pixels. Count direction changes (e.g., vegetation→urban = encroachment). Save as <code>change_YYYY_YYYY.tif</code>.</p></div>
+    <div class="task"><span class="task-num">04</span><p>Build <strong>stats.py</strong>: count pixel area in sq km per class per year using rasterio pixel size metadata. Store as pandas DataFrame. Export as <strong>area_stats.csv</strong> — send to P3 for charts and PDF.</p></div>
+    <div class="deliverable"><span>📦 Deliverable: </span>change_detection.ipynb — multi-year classified maps, area_stats.csv, diff visualisations</div>
+  </div>
+</div>
+
+<div onclick="toggle('p5')" class="phase">
+  <div class="phase-hd"><h3>Phase 5 (Shared) — Backend Integration with App</h3><span class="week">Weeks 13–14</span></div>
+  <div class="phase-body" id="p5">
+    <div class="task"><span class="task-num">01</span><p>Expose <strong>classify_tile()</strong> function in inference/predict.py for P3's Streamlit app to import. Ensure it accepts a GeoTIFF path + model and returns numpy classified array.</p></div>
+    <div class="task"><span class="task-num">02</span><p>Host model weights on <strong>GitHub Releases</strong> (90–200 MB too large for git commit). Provide P3 with download URL — app downloads at startup with requests.get() if .pt file missing.</p></div>
+    <div class="task"><span class="task-num">03</span><p>Verify all GeoTIFFs have correct CRS so they overlay properly on Folium map in P3's app. Test rasterio pixel size metadata used in stats calculation.</p></div>
+    <div class="deliverable"><span>📦 Deliverable: </span>Clean inference/ API + GitHub Release link for model weights + validated area_stats.csv</div>
+  </div>
+</div>
+
+<div onclick="toggle('p6')" class="phase">
+  <div class="phase-hd"><h3>Phase 6 — Error Analysis</h3><span class="week">Weeks 15–16</span></div>
+  <div class="phase-body" id="p6">
+    <div class="task"><span class="task-num">01</span><p>Find at least <strong>3 misclassification cases</strong>. Common failures: urban shadows → water, sparse vegetation → barren. Document these honestly — evaluators value this over inflated accuracy.</p></div>
+    <div class="task"><span class="task-num">02</span><p>Prepare viva answers: <em>"What is IoU and why use it?"</em>, <em>"How does cloud masking improve results?"</em>, <em>"What would you improve with 3 more months?"</em></p></div>
+    <div class="deliverable"><span>📦 Deliverable: </span>Error analysis section in final report + viva Q&A notes</div>
+  </div>
+</div>
+
+<div class="contact">
+  <h2>TEAM CONTACTS</h2>
+  <div class="cinfo">
+    <div class="avatar av1">P1</div>
+    <div><div class="cname">Person 1 — Data & ML Engineer</div><div class="crole">Sends you: model weights, patch coords, preprocessed tiles</div>
+    <div class="clinks"><a href="person1_data_ml.html">View P1 Tasks</a></div></div>
+  </div>
+  <div class="cinfo">
+    <div class="avatar av2">P2</div>
+    <div><div class="cname">You — Backend & Inference</div><div class="crole">Inference pipeline, change detection, statistics</div></div>
+  </div>
+  <div class="cinfo">
+    <div class="avatar av3">P3</div>
+    <div><div class="cname">Person 3 — Frontend & Deploy</div><div class="crole">Receives from you: area_stats.csv, classified map PNGs</div>
+    <div class="clinks"><a href="person3_frontend_deploy.html">View P3 Tasks</a></div></div>
+  </div>
+</div>
+
+</main>
+<script>
+function toggle(id){
+  var el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
