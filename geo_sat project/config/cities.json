@@ -4,6 +4,11 @@
         "bbox": [72.84, 19.04, 72.87, 19.07],
         "default_years": [2019, 2023]
     },
+    "TinyChennai": {
+        "city_id": "tinychennai",
+        "bbox": [80.25, 13.00, 80.28, 13.03],
+        "default_years": [2019, 2023]
+    },
     "Mumbai": {
         "city_id": "mumbai",
         "bbox": [72.80, 18.90, 73.00, 19.10],

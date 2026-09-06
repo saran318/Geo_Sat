@@ -144,6 +144,7 @@ def compute_landcover_area_stats(
             "year1_area_km2": round(area_y1_ha / 100.0, 4),
             "year2_area_km2": round(area_y2_ha / 100.0, 4),
             "net_change_ha": round(net_change_ha, 2),
+            "net_change_km2": round(net_change_ha / 100.0, 4),
             "pct_change": round(pct_change, 2)
         })
 
