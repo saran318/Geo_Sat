@@ -237,6 +237,19 @@ def classify_tile(
         # Format patch into PyTorch FloatTensor: (1, 6, 64, 64)
         transposed = image_patch.transpose(2, 0, 1)
         patch_tensor = torch.from_numpy(transposed).float().unsqueeze(0)
+
+        # Explicit Model Input Validation
+        if patch_tensor.ndim != 4:
+            raise ValueError(f"Expected a 4D tensor [N,C,H,W], got {patch_tensor.shape}")
+        
+        if patch_tensor.shape[1] != 6:
+            raise ValueError(
+                f"Expected 6 input channels [B2,B3,B4,B8,NDVI,NDWI], "
+                f"got {patch_tensor.shape[1]}"
+            )
+            
+        if not torch.isfinite(patch_tensor).all():
+            raise ValueError("Model input contains NaN or infinite values")
         
         batch_tensors.append(patch_tensor)
         batch_coords.append(coords)

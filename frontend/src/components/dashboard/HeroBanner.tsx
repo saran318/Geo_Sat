@@ -2,10 +2,12 @@ import React from 'react';
 import { ArrowRight, Activity, Layers, MapPin } from 'lucide-react';
 
 interface HeroBannerProps {
+  cityName: string;
+  coordinates?: string;
   onNavigate: (tab: string) => void;
 }
 
-export const HeroBanner: React.FC<HeroBannerProps> = ({ onNavigate }) => {
+export const HeroBanner: React.FC<HeroBannerProps> = ({ cityName, coordinates, onNavigate }) => {
   const bands = [
     { code: 'B2', name: 'Blue 490nm', col: '#3b6b80' },
     { code: 'B3', name: 'Green 560nm', col: '#2d5e3f' },
@@ -26,7 +28,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onNavigate }) => {
             <span>·</span>
             <span className="flex items-center gap-1">
               <MapPin className="h-3 w-3 text-primary" />
-              Bengaluru (2019–2023)
+              {cityName} (2019–2023)
             </span>
           </div>
 

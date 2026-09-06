@@ -1,62 +1,262 @@
 {
     "TinyMumbai": {
         "city_id": "tinymumbai",
-        "bbox": [72.84, 19.04, 72.87, 19.07],
-        "default_years": [2019, 2023]
+        "bbox": [
+            72.84,
+            19.04,
+            72.87,
+            19.07
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "TinyChennai": {
         "city_id": "tinychennai",
-        "bbox": [80.25, 13.00, 80.28, 13.03],
-        "default_years": [2019, 2023]
+        "bbox": [
+            80.25,
+            13.0,
+            80.28,
+            13.03
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Mumbai": {
         "city_id": "mumbai",
-        "bbox": [72.80, 18.90, 73.00, 19.10],
-        "default_years": [2019, 2023]
+        "bbox": [
+            72.8,
+            18.9,
+            73.0,
+            19.1
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Delhi": {
         "city_id": "delhi",
-        "bbox": [77.05, 28.50, 77.25, 28.70],
-        "default_years": [2019, 2023]
+        "bbox": [
+            77.05,
+            28.5,
+            77.25,
+            28.7
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Bengaluru": {
         "city_id": "bengaluru",
-        "bbox": [77.55, 12.90, 77.75, 13.10],
-        "default_years": [2019, 2023]
+        "bbox": [
+            77.55,
+            12.9,
+            77.75,
+            13.1
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Chennai": {
         "city_id": "chennai",
-        "bbox": [80.15, 12.90, 80.35, 13.10],
-        "default_years": [2019, 2023]
+        "bbox": [
+            80.15,
+            12.9,
+            80.35,
+            13.1
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Hyderabad": {
         "city_id": "hyderabad",
-        "bbox": [78.35, 17.30, 78.55, 17.50],
-        "default_years": [2019, 2023]
+        "bbox": [
+            78.35,
+            17.3,
+            78.55,
+            17.5
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Kolkata": {
         "city_id": "kolkata",
-        "bbox": [88.25, 22.45, 88.45, 22.65],
-        "default_years": [2019, 2023]
+        "bbox": [
+            88.25,
+            22.45,
+            88.45,
+            22.65
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Pune": {
         "city_id": "pune",
-        "bbox": [73.75, 18.45, 73.95, 18.65],
-        "default_years": [2019, 2023]
+        "bbox": [
+            73.75,
+            18.45,
+            73.95,
+            18.65
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Ahmedabad": {
         "city_id": "ahmedabad",
-        "bbox": [72.50, 22.95, 72.70, 23.15],
-        "default_years": [2019, 2023]
+        "bbox": [
+            72.5,
+            22.95,
+            72.7,
+            23.15
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Jaipur": {
         "city_id": "jaipur",
-        "bbox": [75.70, 26.80, 75.90, 27.00],
-        "default_years": [2019, 2023]
+        "bbox": [
+            75.7,
+            26.8,
+            75.9,
+            27.0
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     },
     "Kochi": {
         "city_id": "kochi",
-        "bbox": [76.20, 9.90, 76.40, 10.10],
-        "default_years": [2019, 2023]
+        "bbox": [
+            76.2,
+            9.9,
+            76.4,
+            10.1
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyDelhi": {
+        "city_id": "tinydelhi",
+        "bbox": [
+            77.14,
+            28.59,
+            77.17,
+            28.62
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyBengaluru": {
+        "city_id": "tinybengaluru",
+        "bbox": [
+            77.64,
+            12.99,
+            77.67,
+            13.02
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyHyderabad": {
+        "city_id": "tinyhyderabad",
+        "bbox": [
+            78.44,
+            17.39,
+            78.47,
+            17.42
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyKolkata": {
+        "city_id": "tinykolkata",
+        "bbox": [
+            88.34,
+            22.54,
+            88.37,
+            22.57
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyPune": {
+        "city_id": "tinypune",
+        "bbox": [
+            73.84,
+            18.54,
+            73.87,
+            18.57
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyAhmedabad": {
+        "city_id": "tinyahmedabad",
+        "bbox": [
+            72.59,
+            23.04,
+            72.62,
+            23.07
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyJaipur": {
+        "city_id": "tinyjaipur",
+        "bbox": [
+            75.79,
+            26.89,
+            75.82,
+            26.92
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "TinyKochi": {
+        "city_id": "tinykochi",
+        "bbox": [
+            76.29,
+            9.99,
+            76.32,
+            10.02
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
     }
 }

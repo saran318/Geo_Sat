@@ -10,12 +10,14 @@ import { UrbanVsWaterChart } from './components/trends/UrbanVsWaterChart';
 import { ChangeDataTable } from './components/trends/ChangeDataTable';
 import { PatchUploader } from './components/inference/PatchUploader';
 import { DownloadActionPanel } from './components/export/DownloadActionPanel';
+import { HeroBanner } from './components/dashboard/HeroBanner';
 
 import { checkHealth, fetchDemoData, fetchAreaStats, fetchAvailableLayers } from './api/client';
 import type { HealthResponse, DemoDataResponse, AreaStatRow, AvailableLayersResponse } from './api/types';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('overview');
+  const [selectedCity, setSelectedCity] = useState<string>('Bengaluru');
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [demoData, setDemoData] = useState<DemoDataResponse | null>(null);
   const [areaStats, setAreaStats] = useState<AreaStatRow[]>([]);
@@ -27,9 +29,9 @@ export const App: React.FC = () => {
       try {
         const [healthRes, demoRes, statsRes, layersRes] = await Promise.all([
           checkHealth(),
-          fetchDemoData(),
-          fetchAreaStats(),
-          fetchAvailableLayers(),
+          fetchDemoData(selectedCity),
+          fetchAreaStats(selectedCity),
+          fetchAvailableLayers(selectedCity),
         ]);
         setHealth(healthRes);
         setDemoData(demoRes);
@@ -41,7 +43,7 @@ export const App: React.FC = () => {
     };
 
     loadInitialData();
-  }, []);
+  }, [selectedCity]);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -66,9 +68,24 @@ export const App: React.FC = () => {
           {/* Sticky Left Column: Narrative & Primary Metrics */}
           <div className="lg:col-span-4 flex flex-col justify-between lg:sticky lg:top-24 h-fit gap-8">
             <div>
-              <div className="flex items-center gap-2 text-xs font-mono text-primary uppercase tracking-widest mb-2">
-                <Satellite className="h-3.5 w-3.5" />
-                GeoSat Intelligence Engine
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-2 text-xs font-mono text-primary uppercase tracking-widest">
+                  <Satellite className="h-3.5 w-3.5" />
+                  GeoSat Engine
+                </div>
+                
+                {/* City Selector */}
+                <select 
+                  className="bg-card text-foreground text-xs font-mono border border-border rounded-md px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer w-full sm:w-auto shadow-sm"
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                >
+                  <option value="Bengaluru">Bengaluru</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Kolkata">Kolkata</option>
+                </select>
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground leading-tight">
                 Satellite Land-Use & Change Detection.
@@ -145,13 +162,15 @@ export const App: React.FC = () => {
             {/* Overview Stream */}
             {activeTab === 'overview' && (
               <div className="flex flex-col gap-16 animate-fadeIn">
+                <HeroBanner cityName={selectedCity} onNavigate={setActiveTab} />
+                
                 {/* Section: Spatial Mapping */}
                 <div className="flex flex-col gap-5 border-b border-border/60 pb-12">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono uppercase text-muted-foreground">01 / SPATIAL MAPPING</span>
                   </div>
                   <h2 className="text-xl font-bold text-foreground">Multi-Temporal Change Map (2019 vs 2023)</h2>
-                  <CompareSwipeMap year1={2019} year2={2023} />
+                  <CompareSwipeMap cityName={selectedCity} year1={2019} year2={2023} />
                   <MapLegend />
                 </div>
 

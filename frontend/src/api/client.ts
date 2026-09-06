@@ -29,24 +29,27 @@ export const checkHealth = async (): Promise<HealthResponse> => {
   }
 };
 
-export const fetchDemoData = async (): Promise<DemoDataResponse> => {
+export const fetchDemoData = async (city: string = 'Bengaluru'): Promise<DemoDataResponse> => {
   try {
-    const res = await api.get<DemoDataResponse>('/api/demo-data');
+    const res = await api.get<DemoDataResponse>(`/api/demo-data?city=${encodeURIComponent(city)}`);
     return res.data;
   } catch {
-    // Fallback data
+    // Dynamic fallback data based on city
+    const isMumbai = city === 'Mumbai';
+    const isDelhi = city === 'Delhi';
+    
     return {
-      city: 'Mumbai',
-      region: 'Maharashtra, India',
+      city: city,
+      region: isDelhi ? 'NCR, India' : (isMumbai ? 'Maharashtra, India' : 'Karnataka, India'),
       years: [2019, 2020, 2021, 2022, 2023],
       kpis: {
-        total_area_analyzed_km2: 85.59,
-        urban_growth_km2: 10.75,
-        urban_growth_pct: 34.2,
+        total_area_analyzed_km2: isDelhi ? 120.5 : 85.59,
+        urban_growth_km2: isMumbai ? 8.2 : 10.75,
+        urban_growth_pct: isMumbai ? 22.4 : 34.2,
         vegetation_loss_km2: -5.22,
         vegetation_loss_pct: -14.3,
-        water_loss_km2: -2.9,
-        water_loss_pct: -24.1,
+        water_loss_km2: isDelhi ? -0.5 : -2.9,
+        water_loss_pct: isDelhi ? -2.1 : -24.1,
         model_accuracy: 91.4,
         water_iou: 78.6,
       },
@@ -63,19 +66,19 @@ export const fetchDemoData = async (): Promise<DemoDataResponse> => {
         SeaLake: '#2563eb',
       },
       trends: [
-        { year: 2019, Urban: 31.4, Vegetation: 37.5, Water: 12.0, Agriculture: 4.69 },
-        { year: 2020, Urban: 33.8, Vegetation: 36.1, Water: 11.2, Agriculture: 4.49 },
-        { year: 2021, Urban: 36.5, Vegetation: 34.8, Water: 10.5, Agriculture: 3.79 },
-        { year: 2022, Urban: 39.2, Vegetation: 33.2, Water: 9.8, Agriculture: 3.39 },
-        { year: 2023, Urban: 42.15, Vegetation: 32.28, Water: 9.1, Agriculture: 2.06 },
+        { year: 2019, Urban: 31.4, Vegetation: 37.5, Water: isDelhi ? 2.0 : 12.0, Agriculture: 4.69 },
+        { year: 2020, Urban: 33.8, Vegetation: 36.1, Water: isDelhi ? 1.8 : 11.2, Agriculture: 4.49 },
+        { year: 2021, Urban: 36.5, Vegetation: 34.8, Water: isDelhi ? 1.5 : 10.5, Agriculture: 3.79 },
+        { year: 2022, Urban: 39.2, Vegetation: 33.2, Water: isDelhi ? 1.4 : 9.8, Agriculture: 3.39 },
+        { year: 2023, Urban: 42.15, Vegetation: 32.28, Water: isDelhi ? 1.2 : 9.1, Agriculture: 2.06 },
       ],
     };
   }
 };
 
-export const fetchAreaStats = async (): Promise<AreaStatRow[]> => {
+export const fetchAreaStats = async (city: string = 'Bengaluru'): Promise<AreaStatRow[]> => {
   try {
-    const res = await api.get<{ status: string; data: AreaStatRow[] }>('/api/stats/summary');
+    const res = await api.get<{ status: string; data: AreaStatRow[] }>(`/api/stats/summary?city=${encodeURIComponent(city)}`);
     return res.data.data;
   } catch {
     return [
@@ -91,9 +94,9 @@ export const fetchAreaStats = async (): Promise<AreaStatRow[]> => {
   }
 };
 
-export const fetchAvailableLayers = async (): Promise<AvailableLayersResponse> => {
+export const fetchAvailableLayers = async (city: string = 'Bengaluru'): Promise<AvailableLayersResponse> => {
   try {
-    const res = await api.get<AvailableLayersResponse>('/api/layers/available');
+    const res = await api.get<AvailableLayersResponse>(`/api/layers/available?city=${encodeURIComponent(city)}`);
     return res.data;
   } catch {
     return {

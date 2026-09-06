@@ -110,6 +110,27 @@ def run_pipeline(city: str, years: list, batch_size: int = 32):
         os.makedirs(target_dir, exist_ok=True)
         download_sentinel2_gee(year=year, output_dir=target_dir, roi_bbox=roi)
         
+        # Validate Raw Bands
+        expected_bands = ['B2.tif', 'B3.tif', 'B4.tif', 'B8.tif']
+        for band_file in expected_bands:
+            band_path = os.path.join(target_dir, band_file)
+            if not os.path.exists(band_path):
+                logger.error(f"Validation failed: Raw band missing: {band_path}")
+                sys.exit(1)
+            
+            try:
+                with rasterio.open(band_path) as src:
+                    if src.count < 1:
+                        logger.error(f"Validation failed: {band_path} has no bands.")
+                        sys.exit(1)
+                    data = src.read(1)
+                    if (src.nodata is not None and np.all(data == src.nodata)) or np.all(data == 0):
+                        logger.error(f"Validation failed: {band_path} contains only empty/nodata.")
+                        sys.exit(1)
+            except Exception as e:
+                logger.error(f"Validation failed: Could not open {band_path}: {e}")
+                sys.exit(1)
+                
         # 2. Run Inference
         out_tif = os.path.join(predictions_dir, f"classified_{year}.tif")
         out_png = os.path.join(predictions_dir, f"classified_{year}.png")

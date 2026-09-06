@@ -3,11 +3,12 @@ import { SlidersHorizontal, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface CompareSwipeMapProps {
+  cityName?: string;
   year1?: number;
   year2?: number;
 }
 
-export const CompareSwipeMap: React.FC<CompareSwipeMapProps> = ({ year1 = 2019, year2 = 2023 }) => {
+export const CompareSwipeMap: React.FC<CompareSwipeMapProps> = ({ cityName = 'Bengaluru', year1 = 2019, year2 = 2023 }) => {
   const [sliderPosition, setSliderPosition] = useState<number>(50);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [activeMode, setActiveMode] = useState<'classified' | 'change_diff'>('classified');
@@ -129,7 +130,7 @@ export const CompareSwipeMap: React.FC<CompareSwipeMapProps> = ({ year1 = 2019, 
 
                 <div className="z-10 flex justify-between items-end text-left">
                   <div className="text-[11px] font-mono text-foreground drop-shadow-xs">
-                    <div>Extent: 12.97°N, 77.59°E</div>
+                    <div>Extent: {cityName} Metropolitan</div>
                     <div className="text-primary font-medium">Urban Expansion Detected</div>
                   </div>
                 </div>
@@ -165,7 +166,7 @@ export const CompareSwipeMap: React.FC<CompareSwipeMapProps> = ({ year1 = 2019, 
 
                   <div className="z-10 flex justify-start items-end text-left">
                     <div className="text-[11px] font-mono text-foreground drop-shadow-xs">
-                      <div>Baseline Extent: Bengaluru Metropolitan</div>
+                      <div>Baseline Extent: {cityName}</div>
                       <div className="text-muted-foreground font-medium">High Canopy Density & Lake Area</div>
                     </div>
                   </div>
