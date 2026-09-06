@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Land Use Analysis | Geo-Sat{% endblock %}
+{% block content %}
+<div class="mb-2">
+    <h1>Land Use Analysis</h1>
+    <p>Select a pre-processed tile directory to run the ResNet-50 inference pipeline.</p>
+</div>
+<div class="glass-card flex-center" style="min-height: 400px; flex-direction: column;">
+    <i class="bi bi-cloud-arrow-up" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+    <h3>Run Inference</h3>
+    <p class="mb-2">Select a dataset containing Sentinel-2 GeoTIFF bands.</p>
+    
+    <div style="width: 100%; max-width: 400px; margin-bottom: 1rem;">
+        <select id="image-dir-input" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(0,0,0,0.5); color: white; border: 1px solid var(--border-color); font-family: var(--font-body); font-size: 1rem; outline: none;">
+            <option value="data/dummy_data">Bengaluru 2019 (Dummy Data)</option>
+            <option value="data/dummy_train_dataset">Training Dataset</option>
+            <option value="data">Root Data Directory</option>
+        </select>
+    </div>
+    
+    <button class="btn btn-primary" onclick="runClassification()" id="upload-btn" data-original-text="Run Classification">Run Classification</button>
+    
+    <div id="classification-result" style="margin-top: 2rem; width: 100%; max-width: 500px; display: none;">
+        <!-- Results will be injected here by app.js -->
+    </div>
+</div>
+{% endblock %}

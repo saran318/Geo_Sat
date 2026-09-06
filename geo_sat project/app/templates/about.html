@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Project Info | Geo-Sat{% endblock %}
+{% block content %}
+<div class="mb-2">
+    <h1>Project Info</h1>
+    <p>BCA Data Science Capstone Project</p>
+</div>
+<div class="glass-card">
+    <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">System Architecture</h3>
+    <ul style="list-style-position: inside; color: var(--text-muted); line-height: 1.8;">
+        <li><strong>Frontend:</strong> FastAPI, Jinja2, Vanilla CSS/JS</li>
+        <li><strong>Backend API:</strong> FastAPI REST Endpoints</li>
+        <li><strong>Machine Learning:</strong> PyTorch (ResNet-50)</li>
+        <li><strong>Geospatial Processing:</strong> Rasterio, NumPy</li>
+    </ul>
+</div>
+{% endblock %}

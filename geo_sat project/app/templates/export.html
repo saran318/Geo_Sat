@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Reports & Export | Geo-Sat{% endblock %}
+{% block content %}
+<div class="mb-2">
+    <h1>Reports & Export</h1>
+    <p>Generate downloadable PDF reports and CSV datasets from the analysis.</p>
+</div>
+<div class="grid-3">
+    <div class="glass-card text-center">
+        <i class="bi bi-file-earmark-pdf" style="font-size: 2.5rem; color: #ffb4ab; margin-bottom: 1rem; display: block;"></i>
+        <h3>PDF Executive Report</h3>
+        <p class="mb-2 mt-1">Full summary with charts.</p>
+        <button class="btn btn-secondary" style="width: 100%;">Generate PDF</button>
+    </div>
+    <div class="glass-card text-center">
+        <i class="bi bi-filetype-csv" style="font-size: 2.5rem; color: var(--accent-green); margin-bottom: 1rem; display: block;"></i>
+        <h3>Raw Data (CSV)</h3>
+        <p class="mb-2 mt-1">Pixel counts and area statistics.</p>
+        <button class="btn btn-secondary" style="width: 100%;">Download CSV</button>
+    </div>
+    <div class="glass-card text-center">
+        <i class="bi bi-file-image" style="font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 1rem; display: block;"></i>
+        <h3>GeoTIFF Outputs</h3>
+        <p class="mb-2 mt-1">High-resolution spatial predictions.</p>
+        <button class="btn btn-secondary" style="width: 100%;">Download .tif</button>
+    </div>
+</div>
+{% endblock %}

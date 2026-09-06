@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Trend Analysis | Geo-Sat{% endblock %}
+{% block content %}
+<div class="mb-2">
+    <h1>Change Detection Analysis</h1>
+    <p>Run multi-temporal land cover change detection across two years.</p>
+</div>
+
+<div class="glass-card mb-2" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+    <h3 class="mb-1"><i class="bi bi-clock-history"></i> Select Temporal Baselines</h3>
+    
+    <div class="grid-2 mb-2">
+        <div>
+            <label style="display: block; margin-bottom: 8px; color: var(--text-muted);">Baseline Year (Raster 1)</label>
+            <select id="raster-year1" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(0,0,0,0.5); color: white; border: 1px solid var(--border-color); font-family: var(--font-body); font-size: 1rem; outline: none;">
+                <option value="data/predictions/prediction_tile.tif">Predicted Tile (Most Recent)</option>
+                <option value="data/dummy_data/dummy_prediction_1.tif">Bengaluru 2019 (Dummy)</option>
+            </select>
+        </div>
+        
+        <div>
+            <label style="display: block; margin-bottom: 8px; color: var(--text-muted);">Comparison Year (Raster 2)</label>
+            <select id="raster-year2" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(0,0,0,0.5); color: white; border: 1px solid var(--border-color); font-family: var(--font-body); font-size: 1rem; outline: none;">
+                <option value="data/dummy_data/dummy_prediction_2.tif">Bengaluru 2023 (Dummy)</option>
+                <option value="data/predictions/prediction_tile.tif">Predicted Tile (Most Recent)</option>
+            </select>
+        </div>
+    </div>
+    
+    <button class="btn btn-primary" onclick="runChangeDetection()" id="detect-btn" data-original-text="Run Change Detection" style="width: 100%;">Run Change Detection</button>
+    
+    <div id="change-result" style="margin-top: 1.5rem; display: none;">
+        <!-- Results injected by app.js -->
+    </div>
+</div>
+
+<div class="grid-2">
+    <div class="glass-card flex-center" style="min-height: 200px; flex-direction: column;">
+        <i class="bi bi-bar-chart-line" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+        <p>Area Statistics Chart (Phase 4)</p>
+    </div>
+    <div class="glass-card flex-center" style="min-height: 200px; flex-direction: column;">
+        <i class="bi bi-pie-chart" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 1rem;"></i>
+        <p>Class Distribution Chart (Phase 4)</p>
+    </div>
+</div>
+{% endblock %}

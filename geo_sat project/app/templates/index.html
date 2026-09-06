@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Geo-Sat{% endblock %}
+
+{% block content %}
+<div class="flex-between mb-2">
+    <div>
+        <h1>Mission Control</h1>
+        <p>Real-time land use insights and system status.</p>
+    </div>
+    <div id="api-health-status" style="background: rgba(0,0,0,0.5); padding: 8px 16px; border-radius: 20px; font-family: var(--font-mono); font-size: 0.875rem;">
+        <i class="bi bi-arrow-repeat spin"></i> Checking Engine...
+    </div>
+</div>
+
+<div class="grid-4 mb-2">
+    <div class="glass-card">
+        <h4 style="color: var(--text-muted); margin-bottom: 8px;">Total Analyzed Area</h4>
+        <h2 style="color: var(--accent-cyan); font-size: 2.5rem;">45,210 <span style="font-size: 1rem; color: var(--text-muted);">ha</span></h2>
+        <p class="mt-1" style="font-size: 0.85rem;"><i class="bi bi-arrow-up-right" style="color: var(--accent-green)"></i> +2.4% this year</p>
+    </div>
+    
+    <div class="glass-card">
+        <h4 style="color: var(--text-muted); margin-bottom: 8px;">Urban Growth</h4>
+        <h2 style="color: #ffb59e; font-size: 2.5rem;">12.5 <span style="font-size: 1rem; color: var(--text-muted);">%</span></h2>
+        <p class="mt-1" style="font-size: 0.85rem;"><i class="bi bi-exclamation-triangle" style="color: #ffb4ab"></i> High Alert Region</p>
+    </div>
+    
+    <div class="glass-card">
+        <h4 style="color: var(--text-muted); margin-bottom: 8px;">Vegetation Loss</h4>
+        <h2 style="color: #ffb4ab; font-size: 2.5rem;">-8.1 <span style="font-size: 1rem; color: var(--text-muted);">%</span></h2>
+        <p class="mt-1" style="font-size: 0.85rem;">Since 2019 baseline</p>
+    </div>
+    
+    <div class="glass-card">
+        <h4 style="color: var(--text-muted); margin-bottom: 8px;">Model Confidence</h4>
+        <h2 style="color: var(--accent-green); font-size: 2.5rem;">94.2 <span style="font-size: 1rem; color: var(--text-muted);">%</span></h2>
+        <p class="mt-1" style="font-size: 0.85rem;">ResNet-50 v2.0</p>
+    </div>
+</div>
+
+<div class="grid-2">
+    <div class="glass-card" style="min-height: 400px;">
+        <h3>Recent Classification Scans</h3>
+        <p class="mb-1">Last 5 API processing requests.</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 1.5rem;">
+            <!-- Placeholder List -->
+            <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border-left: 4px solid var(--accent-cyan); display: flex; justify-content: space-between;">
+                <div>
+                    <strong style="display: block;">Bengaluru Sector 4</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">2023 Sentinel-2 Tile</span>
+                </div>
+                <span style="background: var(--accent-cyan-glow); color: var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; height: max-content;">Completed</span>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border-left: 4px solid var(--accent-green); display: flex; justify-content: space-between;">
+                <div>
+                    <strong style="display: block;">Delhi Outskirts</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">2022 Sentinel-2 Tile</span>
+                </div>
+                <span style="background: rgba(68, 243, 169, 0.1); color: var(--accent-green); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; height: max-content;">Completed</span>
+            </div>
+        </div>
+        
+        <div class="mt-2 text-center">
+            <a href="/analysis" class="btn btn-secondary" style="width: 100%;">Run New Analysis</a>
+        </div>
+    </div>
+    
+    <div class="glass-card flex-center" style="background: linear-gradient(rgba(11, 19, 38, 0.8), rgba(11, 19, 38, 0.8)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center; flex-direction: column; text-align: center;">
+        <i class="bi bi-satellite" style="font-size: 4rem; color: var(--accent-cyan); margin-bottom: 1rem; text-shadow: 0 0 20px var(--accent-cyan-glow);"></i>
+        <h2 style="color: white; margin-bottom: 0.5rem;">Interactive Map Viewer</h2>
+        <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; max-width: 80%;">Visualize the geospatial predictions and change detection polygons overlaying real-world coordinates.</p>
+        <a href="/map" class="btn btn-primary">Open Map Viewer</a>
+    </div>
+</div>
+{% endblock %}

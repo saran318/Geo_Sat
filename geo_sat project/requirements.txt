@@ -1,0 +1,31 @@
+# ─── Person 1: Data & ML ──────────────────────────────────────────────────────
+torch
+torchvision
+numpy
+pandas
+matplotlib
+rasterio
+geopandas
+shapely
+scikit-learn
+Pillow
+sentinelsat
+earthengine-api
+jupyter
+requests
+tqdm
+seaborn
+imageio
+psutil
+
+# ─── Person 2: Backend & Inference ───────────────────────────────────────────
+fastapi
+uvicorn
+python-multipart
+
+# ─── Person 3: Frontend & Deployment ─────────────────────────────────────────
+streamlit>=1.35.0
+folium>=0.17.0
+streamlit-folium>=0.22.0
+plotly>=5.22.0
+reportlab>=4.2.0
