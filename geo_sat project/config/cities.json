@@ -116,6 +116,19 @@
             2023
         ]
     },
+    "Kanchipuram": {
+        "city_id": "kanchipuram",
+        "bbox": [
+            79.60,
+            12.73,
+            79.80,
+            12.93
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
     "Chennai": {
         "city_id": "chennai",
         "bbox": [
