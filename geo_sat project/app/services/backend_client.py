@@ -288,6 +288,21 @@ async def get_available_layers(city: str):
             
     years.sort()
     
+    # Read dynamic bounds from metadata.json if available
+    bounds = [[18.85, 72.75], [19.15, 73.05]] # fallback default
+    metadata_path = os.path.join(valid_dir, "metadata.json")
+    if os.path.exists(metadata_path):
+        try:
+            import json
+            with open(metadata_path, 'r') as f:
+                meta = json.load(f)
+                if "bounding_box" in meta:
+                    # bounding_box is [min_lon, min_lat, max_lon, max_lat]
+                    min_lon, min_lat, max_lon, max_lat = meta["bounding_box"]
+                    bounds = [[min_lat, min_lon], [max_lat, max_lon]]
+        except Exception as e:
+            logger.warning(f"Failed to read metadata for bounds: {e}")
+            
     for y in years:
         png_name = f"classified_{y}.png"
         tif_name = f"classified_{y}.tif"
@@ -299,7 +314,7 @@ async def get_available_layers(city: str):
             "png_url": f"/data/results/{rel_path_from_results}/predictions/{png_name}" if "predictions" in predictions_dir else f"/data/results/{rel_path_from_results}/{png_name}",
             "tif_exists": os.path.exists(tif_path),
             "label": f"Sentinel-2 Composite {y}",
-            "bounds": [[18.85, 72.75], [19.15, 73.05]] # Hardcoded bounds for now
+            "bounds": bounds
         })
         
     # Dynamically find change maps
