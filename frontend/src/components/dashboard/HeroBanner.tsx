@@ -9,12 +9,12 @@ interface HeroBannerProps {
 
 export const HeroBanner: React.FC<HeroBannerProps> = ({ cityName, coordinates, onNavigate }) => {
   const bands = [
-    { code: 'B2', name: 'Blue 490nm', col: '#3b6b80' },
-    { code: 'B3', name: 'Green 560nm', col: '#2d5e3f' },
-    { code: 'B4', name: 'Red 665nm', col: '#8c4a38' },
-    { code: 'B8', name: 'NIR 842nm', col: '#1b3a27' },
-    { code: 'NDVI', name: 'Veg. Index', col: '#5f936c' },
-    { code: 'NDWI', name: 'Water Index', col: '#2a5a68' },
+    { code: 'B2', name: 'Blue 490nm', col: '#3b82f6' }, // bright blue
+    { code: 'B3', name: 'Green 560nm', col: '#22c55e' }, // bright green
+    { code: 'B4', name: 'Red 665nm', col: '#ef4444' }, // bright red
+    { code: 'B8', name: 'NIR 842nm', col: '#d946ef' }, // bright magenta (NIR)
+    { code: 'NDVI', name: 'Veg. Index', col: '#84cc16' }, // bright lime
+    { code: 'NDWI', name: 'Water Index', col: '#06b6d4' }, // bright cyan
   ];
 
   return (

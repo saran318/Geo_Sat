@@ -64,6 +64,58 @@
             2023
         ]
     },
+    "Coimbatore": {
+        "city_id": "coimbatore",
+        "bbox": [
+            76.85,
+            10.91,
+            77.05,
+            11.11
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "Madurai": {
+        "city_id": "madurai",
+        "bbox": [
+            78.02,
+            9.82,
+            78.22,
+            10.02
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "Tiruchirappalli": {
+        "city_id": "tiruchirappalli",
+        "bbox": [
+            78.60,
+            10.69,
+            78.80,
+            10.89
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
+    "Salem": {
+        "city_id": "salem",
+        "bbox": [
+            78.04,
+            11.56,
+            78.24,
+            11.76
+        ],
+        "default_years": [
+            2019,
+            2023
+        ]
+    },
     "Chennai": {
         "city_id": "chennai",
         "bbox": [

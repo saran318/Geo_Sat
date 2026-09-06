@@ -128,7 +128,7 @@ export const CompareSwipeMap: React.FC<CompareSwipeMapProps> = ({ cityName = 'Be
                   </span>
                 </div>
 
-                <div className="z-10 flex justify-between items-end text-left">
+                <div className="z-10 flex justify-end items-end text-right">
                   <div className="text-[11px] font-mono text-foreground drop-shadow-xs">
                     <div>Extent: {cityName} Metropolitan</div>
                     <div className="text-primary font-medium">Urban Expansion Detected</div>

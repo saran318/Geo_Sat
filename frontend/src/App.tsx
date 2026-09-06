@@ -104,7 +104,7 @@ export const App: React.FC = () => {
                 {
                   id: 'built-up',
                   label: 'Built-Up Expansion',
-                  value: demoData?.metrics?.urban_growth_km2 ? `+${demoData.metrics.urban_growth_km2} km²` : '---',
+                  value: demoData?.kpis?.urban_growth_km2 !== undefined ? `+${demoData.kpis.urban_growth_km2} km²` : '---',
                   desc: 'Urban sprawl identified',
                   valColor: 'text-foreground',
                   descColor: 'text-primary'
@@ -112,7 +112,7 @@ export const App: React.FC = () => {
                 {
                   id: 'water',
                   label: 'Lake Water Area',
-                  value: demoData?.metrics?.water_loss_km2 ? `-${demoData.metrics.water_loss_km2} km²` : '---',
+                  value: demoData?.kpis?.water_loss_km2 !== undefined ? `${demoData.kpis.water_loss_km2 > 0 ? '-' : '+'}${Math.abs(demoData.kpis.water_loss_km2)} km²` : '---',
                   desc: 'Surface water reduction',
                   valColor: 'text-foreground',
                   descColor: 'text-muted-foreground'
@@ -120,7 +120,7 @@ export const App: React.FC = () => {
                 {
                   id: 'accuracy',
                   label: 'Overall Accuracy',
-                  value: demoData?.metrics?.accuracy_pct ? `${demoData.metrics.accuracy_pct}%` : '---',
+                  value: demoData?.kpis?.model_accuracy !== undefined ? `${demoData.kpis.model_accuracy}%` : '---',
                   desc: 'India LULC Benchmark',
                   valColor: 'text-primary',
                   descColor: 'text-muted-foreground'
