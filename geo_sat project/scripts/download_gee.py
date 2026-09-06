@@ -28,7 +28,7 @@ logger = utils.get_logger(__name__)
 
 # Default Region of Interest (Rome, Italy bounding box)
 DEFAULT_ROI = [12.45, 41.85, 12.55, 41.95]
-TILE_SIZE_DEGREES = 0.05
+TILE_SIZE_DEGREES = 0.25  # Increased from 0.05 to avoid over-tiling small ROIs
 MAX_DEPTH = 5
 
 
