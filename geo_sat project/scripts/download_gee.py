@@ -39,6 +39,18 @@ def initialize_gee() -> bool:
         service_account = os.getenv("GEE_SERVICE_ACCOUNT")
         key_path = os.getenv("GEE_KEY_JSON_PATH")
 
+        # Automatically extract from GOOGLE_APPLICATION_CREDENTIALS if set (e.g., in Colab)
+        google_creds = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        if not service_account and google_creds and os.path.exists(google_creds):
+            import json
+            try:
+                with open(google_creds, 'r') as f:
+                    creds_data = json.load(f)
+                    service_account = creds_data.get("client_email")
+                    key_path = google_creds
+            except Exception as e:
+                logger.error(f"Could not parse GOOGLE_APPLICATION_CREDENTIALS: {e}")
+
         if service_account and key_path:
             full_key_path = os.path.join(bcfg.PROJECT_ROOT, key_path)
             logger.info(f"Authenticating GEE with Service Account: {service_account}")
