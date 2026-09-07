@@ -223,18 +223,24 @@ def extract_patches(
     width = meta['width']
     height = meta['height']
     
+    # Load entire image into RAM once (approx 40MB for 2200x2200x4 uint16)
+    full_image_bands = load_bands(band_paths)
+    
+    full_scl_data = None
+    if scl_path and os.path.exists(scl_path):
+        full_scl_data = load_scl_band(scl_path)
+    
     for row_off in range(0, height - patch_size + 1, stride):
         for col_off in range(0, width - patch_size + 1, stride):
-            window = Window(col_off, row_off, patch_size, patch_size)
             
-            # Load only the specific window
-            raw_bands = load_bands(band_paths, window=window)
+            # Slice the pre-loaded arrays instead of reopening the file!
+            raw_bands = full_image_bands[row_off:row_off+patch_size, col_off:col_off+patch_size, :].copy()
 
             # Apply SCL cloud mask if SCL path provided
             is_cloudy = False
             cloud_pct = 0.0
-            if scl_path and os.path.exists(scl_path):
-                scl_data = load_scl_band(scl_path, window=window)
+            if full_scl_data is not None:
+                scl_data = full_scl_data[row_off:row_off+patch_size, col_off:col_off+patch_size]
                 raw_bands, cloud_mask = apply_scl_cloud_mask(raw_bands, scl_data)
                 cloud_pct = (np.sum(cloud_mask) / cloud_mask.size) * 100.0
                 if cloud_pct > max_cloud_pct:
@@ -242,7 +248,6 @@ def extract_patches(
 
             if is_cloudy:
                 logger.debug(f"Skipping patch at {(row_off, col_off)} due to high cloudiness ({cloud_pct:.1f}%).")
-                del raw_bands
                 continue
             
             # Process and compute NDVI/NDWI

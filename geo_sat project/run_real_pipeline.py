@@ -106,7 +106,7 @@ def run_pipeline(city: str, years: list, batch_size: int = 32):
         logger.info(f"--- Processing Year: {year} ---")
         
         # 1. Download data
-        target_dir = os.path.join(bcfg.PROJECT_ROOT, "data", "raw", "sentinel2", str(year))
+        target_dir = os.path.join(bcfg.PROJECT_ROOT, "data", "raw", "sentinel2", city, str(year))
         os.makedirs(target_dir, exist_ok=True)
         download_sentinel2_gee(year=year, output_dir=target_dir, roi_bbox=roi)
         
